@@ -29,11 +29,8 @@ export class DataArt {
   constructor({ apiKey, flushInterval }: DataArtOptions) {
     this._apiKey = apiKey
     this._flushInterval = flushInterval
+    this._actionsQueue = new Queue()
 
-    this._init()
-  }
-
-  private _init(): void {
     setInterval(() => this._flushActions(), this._flushInterval)
   }
 
@@ -60,7 +57,8 @@ export class DataArt {
         'Content-Type': 'application/json',
         'X-API-Key': this._apiKey,
       },
-      body: payload
+      body: payload,
+      mode: 'cors'
     })
   }
 

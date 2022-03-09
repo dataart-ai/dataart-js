@@ -15,6 +15,6 @@ export class Queue {
   }
 
   pop(n: number): string[] {
-    return this._queue.slice(0, n)
+    return this._queue.splice(0, n)
   }
 }

@@ -1,1 +1,1 @@
-export { DataArt } from './lib/dataart'
+export { DataArt as default } from './lib/dataart'

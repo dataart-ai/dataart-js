@@ -17,7 +17,93 @@ yarn add @dataart.ai/dataart-js
 
 ## Usage
 
+First, import the DataArt client and create an instance:
+
+```javascript
+import DataArt from '@dataart.ai/dataart-js'
+
+const client = new DataArt({
+  apiKey: 'YOUR-API-KEY',
+  flushInterval: 30 * 1000  // 20 seconds
+});
+```
+
+Now you can send actions or identities with `emitAction` and `identify` methods:
+
+```javascript
+client.emitAction({
+  eventKey: 'key1',
+  userKey: 'user1',
+  isAnonymousUser: false,
+  timestamp: new Date(),
+  metadata: {
+    'k1': 'v1',
+    'k2': 'v2',
+  }
+})
+```
+
+```javascript
+client.identify({
+  userKey: 'user1',
+  metadata: {
+    fromReact: true,
+    age: 20,
+  }
+});
+```
+
 ## React Example
+
+```javascript
+
+import { useMemo, useCallback } from 'react';
+import DataArt from '@dataart.ai/dataart-js'
+
+function MyComponent() {
+  const client = useMemo(() => {
+    return new DataArt({
+      apiKey: 'YOUR-API-KEY',
+      flushInterval: 30 * 1000  // 20 seconds
+    });
+  }, []);
+
+  const emitAction = useCallback(() => {
+    client.emitAction({
+      eventKey: 'key1',
+      userKey: 'user1',
+      isAnonymousUser: false,
+      timestamp: new Date(),
+      metadata: {
+        'k1': 'v1',
+        'k2': 'v2',
+      }
+    })
+
+  }, [client]);
+
+  const identify = useCallback(() => {
+    client.identify({
+      userKey: 'user1',
+      metadata: {
+        fromReact: true,
+        age: 20,
+      }
+    });
+
+  }, [client]);
+
+  return (
+    <div className="App" onClick={identify}>
+      <button onClick={emitAction}>Emit Action</button>
+      <button onClick={identify}>Identify</button>
+    </div>
+  );
+}
+
+export default MyComponent;
+
+```
 
 ## License
 
