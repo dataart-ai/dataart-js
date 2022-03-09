@@ -11,8 +11,8 @@ DataArt platform client for JavaScript.
 Install the package using npm
 
 ```bash
-npm i dataart-js
-yarn add dataart-js
+npm i @dataart.ai/dataart-js
+yarn add @dataart.ai/dataart-js
 ```
 
 ## Usage
